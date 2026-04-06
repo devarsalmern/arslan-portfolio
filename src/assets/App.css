@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #050508;
+  --surface: #0d0d14;
+  --card: #111119;
+  --border: rgba(255, 255, 255, 0.06);
+  --border2: rgba(255, 255, 255, 0.12);
+  --accent: #00e5a0;
+  --adim: rgba(0, 229, 160, 0.12);
+  --accent2: #7c6ff7;
+  --a2dim: rgba(124, 111, 247, 0.12);
+  --accent3: #f5a623;
+  --text: #eeeef5;
+  --muted: #7878a0;
+  --dim: #3a3a55;
+  --ff: 'Syne', sans-serif;
+  --fm: 'JetBrains Mono', monospace;
+  --r: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+
+/* ── ANIMATIONS ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 229, 160, 0.4); }
+  50%       { opacity: 0.5; box-shadow: 0 0 0 8px rgba(0, 229, 160, 0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes livep {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 160, 0.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(0, 229, 160, 0); }
+}
+
+/* ── HERO ANIMATIONS ── */
+.hero-n1 { animation: slideIn 0.7s 0.2s both; }
+.hero-n2 { animation: slideIn 0.7s 0.4s both; }
+.hero-n3 { animation: slideIn 0.7s 0.6s both; }
+.hcard-anim { animation: slideIn 0.7s 0.8s both; }
+
+/* ── PERSISTENT STATES ── */
+.blink-dot { animation: blink 2s ease-in-out infinite; }
+.live-dot  { animation: livep 2s ease-in-out infinite; }
+
+/* Avatar spinning ring */
+.av-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00e5a0, #7c6ff7);
+  z-index: -1;
+  opacity: 0.25;
+  animation: spin 6s linear infinite;
+}
+
+/* ── CHIP HIGHLIGHT ── */
+.chip-hi {
+  border-color: rgba(0, 229, 160, 0.3) !important;
+  color: var(--accent) !important;
+  background: var(--adim) !important;
+}
+
+/* ── SKILL TAG HOT ── */
+.sk-tag-hot {
+  background: var(--adim) !important;
+  border-color: rgba(0, 229, 160, 0.25) !important;
+  color: var(--accent) !important;
+}
+
+/* ── CARD TOP LINE ── */
+.topline {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* ── INPUTS ── */
+input,
+textarea {
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(0, 229, 160, 0.1) !important;
+}
+
+/* ── HOVER EFFECTS (mouse only) ── */
+@media (hover: hover) {
+
+  /* Nav link */
+  .nav-a:hover { color: var(--accent) !important; }
+  .nav-a:hover .nav-ul { width: 100% !important; }
+
+  /* Chip */
+  .chip-item:hover {
+    border-color: rgba(0, 229, 160, 0.3) !important;
+    color: var(--accent) !important;
+    background: var(--adim) !important;
+  }
+
+  /* Skill tag */
+  .sk-tag:hover {
+    background: var(--adim) !important;
+    border-color: rgba(0, 229, 160, 0.25) !important;
+    color: var(--accent) !important;
+  }
+
+  /* Skill group card */
+  .sk-hover:hover {
+    border-color: var(--border2) !important;
+    transform: translateY(-3px);
+  }
+  .sk-hover:hover .topline { opacity: 1 !important; }
+
+  /* Course card */
+  .card-hover:hover {
+    border-color: var(--border2) !important;
+    transform: translateY(-4px);
+  }
+  .card-hover:hover .topline { opacity: 1 !important; }
+
+  /* Project card */
+  .proj-hover:hover {
+    border-color: var(--border2) !important;
+    transform: translateY(-4px);
+  }
+  .proj-hover:hover .topline { opacity: 1 !important; }
+
+  /* Stat card */
+  .stat-hover:hover {
+    border-color: var(--border2) !important;
+    transform: translateY(-2px);
+  }
+
+  /* Education card */
+  .edu-hover:hover {
+    border-color: var(--border2) !important;
+    transform: translateY(-2px);
+  }
+
+  /* Contact link */
+  .clink-hover:hover {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background: var(--adim) !important;
+    transform: translateX(4px);
+  }
+  .clink-hover:hover .clink-icon {
+    background: var(--adim) !important;
+    border-color: rgba(0, 229, 160, 0.3) !important;
+  }
+
+  /* Primary button */
+  .bp-btn:hover {
+    background: #1afdb3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 229, 160, 0.2);
+  }
+
+  /* Ghost button */
+  .bg-btn:hover {
+    border-color: var(--accent2) !important;
+    color: var(--accent2) !important;
+    background: var(--a2dim) !important;
+  }
+
+  /* External link arrow */
+  .clink-ext:hover { gap: 0.7rem !important; }
+}
