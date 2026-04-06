@@ -1156,14 +1156,21 @@ export default function App() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: "1.7rem",
-                  fontWeight: 800,
-                  color: "#050508",
                   position: "relative",
                   zIndex: 1,
+                  overflow: "hidden",
                 }}
               >
-                AA
+                <img
+                  src="/img.png" // <-- replace with your image path
+                  alt="avatar"
+                  style={{
+                    width: "90%",
+                    height: "90%",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
               <div
                 style={{
