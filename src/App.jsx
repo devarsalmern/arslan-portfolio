@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import "./App.css";
 
+// ─── DATA ────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { href: "about", label: "about" },
   { href: "skills", label: "skills" },
@@ -113,10 +115,10 @@ const CHIPS = [
 ];
 
 const STATS = [
-  { num: "1+", label: "YRS EXPERIENCE" },
-  { num: "BSc", label: "COMP SCIENCE" },
+  { num: "1+", label: "YRS EXP" },
+  { num: "BSc", label: "COMP SCI" },
   { num: "MSc", label: "IN PROGRESS" },
-  { num: "LT", label: "VILNIUS BASED" },
+  { num: "LT", label: "VILNIUS" },
 ];
 
 const SKILL_GROUPS = [
@@ -220,8 +222,9 @@ const EXPERIENCE = [
   {
     live: true,
     date: "FEB 2026 – PRESENT",
-    role: "Master's Student — Organizational Innovation & Management",
-    company: "Kazimieras Simonavičius University · Vilnius, Lithuania 🇱🇹",
+    role: "Master's Student",
+    roleDetail: "Organizational Innovation & Management",
+    company: "Kazimieras Simonavičius University · Vilnius, LT 🇱🇹",
     bullets: [
       "Studying process optimization, digital transformation, and management innovation",
       "Applying organizational theory to IT systems design and infrastructure planning",
@@ -232,14 +235,15 @@ const EXPERIENCE = [
     live: false,
     date: "SEP 2024 – JAN 2026 · 16 MONTHS",
     role: "Junior Software Engineer",
+    roleDetail: "",
     company: "ITS Tech World · Gujranwala, Pakistan",
     bullets: [
       "Developed and maintained full-stack web applications using MongoDB, Express.js, React, and Node.js",
-      "Built and optimized RESTful APIs for efficient, scalable data handling across production systems",
+      "Built and optimized RESTful APIs for efficient, scalable data handling",
       "Collaborated cross-functionally on feature development, debugging, and release cycles",
-      "Translated business requirements into technical solutions through direct stakeholder engagement",
+      "Translated business requirements into technical solutions",
       "Improved application performance through systematic code review and optimization",
-      "Established Git-based collaborative workflows and version control best practices for the team",
+      "Established Git-based collaborative workflows for the team",
     ],
   },
 ];
@@ -250,7 +254,7 @@ const COURSES = [
     badgeType: "progress",
     provider: "UDEMY · IMRAN TELI",
     title: "Decoding DevOps — Basics to Advanced with AI",
-    desc: "Comprehensive hands-on DevOps bootcamp: Linux, networking, scripting, Git, Jenkins, GitHub Actions, GitLab CI/CD, Terraform, Ansible, Docker, Kubernetes, AWS, Prometheus, Grafana, ArgoCD GitOps, and AI-powered DevOps workflows.",
+    desc: "Comprehensive hands-on DevOps bootcamp: Linux, networking, scripting, Git, Jenkins, GitHub Actions, GitLab CI/CD, Terraform, Ansible, Docker, Kubernetes, AWS, Prometheus, Grafana, and ArgoCD GitOps.",
     tags: [
       "Linux",
       "Docker",
@@ -273,7 +277,7 @@ const COURSES = [
     badgeType: "progress",
     provider: "MICROSOFT LEARN · OFFICIAL PLAN",
     title: "Azure Skills Learning Path",
-    desc: "Structured Microsoft Learn plan with milestone-based curriculum covering Azure fundamentals, cloud administration, networking, security, and infrastructure management — with built-in labs and knowledge checks.",
+    desc: "Structured Microsoft Learn plan covering Azure fundamentals, cloud administration, networking, security, and infrastructure management — with built-in labs and knowledge checks.",
     tags: [
       "Azure",
       "Cloud concepts",
@@ -292,7 +296,7 @@ const COURSES = [
     badgeType: "done",
     provider: "MICROSOFT LEARN · APRIL 2026",
     title: "Introduction to Azure Cloud Shell",
-    desc: "Official Microsoft certification covering Azure Cloud Shell fundamentals — navigating the Azure portal, managing resources via Bash and PowerShell, and operating Azure's browser-based cloud terminal environment.",
+    desc: "Official Microsoft certification covering Azure Cloud Shell — navigating the Azure portal, managing resources via Bash and PowerShell, and operating the browser-based cloud terminal.",
     tags: ["Azure Cloud Shell", "Bash", "PowerShell", "Azure Portal"],
     link: "https://learn.microsoft.com/en-us/users/arslanali-7417/achievements/print/wvutb8bn",
     linkLabel: "View certificate",
@@ -303,7 +307,7 @@ const COURSES = [
 const PROJECTS = [
   {
     title: "DayWise",
-    desc: "A productivity application designed to streamline daily workflows with intelligent task management and automation concepts. Built end-to-end as an independent project using AI-assisted tooling.",
+    desc: "A productivity application for streamlining daily workflows with intelligent task management and automation concepts. Built end-to-end using AI-assisted tooling.",
     tags: ["Replit", "AI-assisted dev", "Workflow automation", "UX design"],
     icon: (
       <svg
@@ -317,10 +321,9 @@ const PROJECTS = [
       </svg>
     ),
   },
-
   {
     title: "MERN Stack Applications",
-    desc: "Multiple production-grade full-stack applications built at ITS Tech World — RESTful backends, React frontends, MongoDB schemas, and optimized API layers serving real users.",
+    desc: "Multiple production-grade apps built at ITS Tech World — RESTful backends, React frontends, MongoDB schemas, and optimized API layers.",
     tags: ["React", "Node.js", "MongoDB", "Express.js", "REST API", "Git"],
     icon: (
       <svg
@@ -344,7 +347,7 @@ const EDUCATION = [
     pill: "CURRENTLY ENROLLED",
     degree: "MSc — Organizational Innovation & Management",
     school: "Kazimieras Simonavičius University · Vilnius, LT",
-    meta: "Feb 2026 – present · EQF Level 7 · Management & Administration",
+    meta: "Feb 2026 – present · EQF Level 7",
   },
   {
     current: false,
@@ -373,7 +376,7 @@ const CONTACT_LINKS = [
   },
   {
     href: "https://www.linkedin.com/in/arslan-ali-86105721a/",
-    label: "linkedin.com/in/arslan-ali-86105721a",
+    label: "linkedin.com/in/arslan-ali",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -428,7 +431,7 @@ function useActiveSection(ids) {
         ([entry]) => {
           if (entry.isIntersecting) setActive(id);
         },
-        { threshold: 0.4 }
+        { threshold: 0.3 }
       );
       obs.observe(el);
       return obs;
@@ -450,7 +453,7 @@ function useReveal() {
           obs.disconnect();
         }
       },
-      { threshold: 0.12 }
+      { threshold: 0.08 }
     );
     obs.observe(ref.current);
     return () => obs.disconnect();
@@ -458,20 +461,34 @@ function useReveal() {
   return [ref, visible];
 }
 
-// ─── SMALL COMPONENTS ────────────────────────────────────────────────────────
-function Reveal({ children, dir = "up", delay = 0, style = {} }) {
+function useWindowWidth() {
+  const [w, setW] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
+  useEffect(() => {
+    const onResize = () => setW(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return w;
+}
+
+// ─── COMPONENTS ──────────────────────────────────────────────────────────────
+function Reveal({ children, dir = "up", delay = 0 }) {
   const [ref, visible] = useReveal();
-  const base = {
-    transition: `opacity 0.7s ${delay}ms ease, transform 0.7s ${delay}ms ease`,
-    opacity: visible ? 1 : 0,
-  };
-  const transform = visible
-    ? "none"
-    : dir === "left"
-    ? "translateX(-28px)"
-    : "translateY(32px)";
   return (
-    <div ref={ref} style={{ ...base, transform, ...style }}>
+    <div
+      ref={ref}
+      style={{
+        transition: `opacity 0.7s ${delay}ms ease, transform 0.7s ${delay}ms ease`,
+        opacity: visible ? 1 : 0,
+        transform: visible
+          ? "none"
+          : dir === "left"
+          ? "translateX(-28px)"
+          : "translateY(28px)",
+      }}
+    >
       {children}
     </div>
   );
@@ -484,16 +501,17 @@ function SectionHeader({ num, title }) {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "1.2rem",
-          marginBottom: "3.5rem",
+          gap: "1rem",
+          marginBottom: "2.5rem",
         }}
       >
         <span
           style={{
             fontFamily: "var(--fm)",
-            fontSize: "0.68rem",
+            fontSize: "0.65rem",
             color: "var(--dim)",
             letterSpacing: "0.12em",
+            flexShrink: 0,
           }}
         >
           {num}
@@ -501,22 +519,30 @@ function SectionHeader({ num, title }) {
         <h2
           style={{
             fontFamily: "var(--ff)",
-            fontSize: "clamp(1.8rem,3.5vw,2.7rem)",
+            fontSize: "clamp(1.5rem,5vw,2.6rem)",
             fontWeight: 700,
             letterSpacing: "-0.03em",
             margin: 0,
+            whiteSpace: "nowrap",
           }}
         >
           {title}
         </h2>
-        <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
+        <div
+          style={{
+            flex: 1,
+            height: 1,
+            background: "var(--border)",
+            minWidth: 20,
+          }}
+        />
       </div>
     </Reveal>
   );
 }
 
 function CourseLogo({ type }) {
-  const styles = {
+  const s = {
     udemy: {
       background: "rgba(163,113,247,0.12)",
       border: "1px solid rgba(163,113,247,0.2)",
@@ -533,18 +559,18 @@ function CourseLogo({ type }) {
   return (
     <div
       style={{
-        width: 46,
-        height: 46,
+        width: 42,
+        height: 42,
         borderRadius: 10,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         flexShrink: 0,
-        ...styles[type],
+        ...s[type],
       }}
     >
       {type === "udemy" && (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path
             d="M12 2L4 6v6c0 5.25 3.4 10.15 8 11.38C16.6 22.15 20 17.25 20 12V6L12 2z"
             stroke="#a371f7"
@@ -561,7 +587,7 @@ function CourseLogo({ type }) {
         </svg>
       )}
       {type === "ms" && (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
           <rect x="2" y="2" width="9" height="9" fill="#0078d4" />
           <rect x="13" y="2" width="9" height="9" fill="#50d9ff" />
           <rect x="2" y="13" width="9" height="9" fill="#7fba00" />
@@ -569,7 +595,7 @@ function CourseLogo({ type }) {
         </svg>
       )}
       {type === "azure" && (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
           <rect
             x="2"
             y="4"
@@ -598,7 +624,7 @@ function CourseLogo({ type }) {
   );
 }
 
-// ─── MAIN APP ────────────────────────────────────────────────────────────────
+// ─── MAIN ────────────────────────────────────────────────────────────────────
 export default function App() {
   const progress = useScrollProgress();
   const activeSection = useActiveSection(NAV_LINKS.map((l) => l.href));
@@ -609,7 +635,10 @@ export default function App() {
     email: "",
     message: "",
   });
-  const [formStatus, setFormStatus] = useState(null); // null | "sending" | "sent" | "error"
+  const [formStatus, setFormStatus] = useState(null);
+  const w = useWindowWidth();
+  const isMobile = w < 768;
+  const isTablet = w < 1024;
 
   const scrollTo = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -636,72 +665,16 @@ export default function App() {
     }, 1500);
   };
 
+  const px = isMobile ? "1.25rem" : "5%";
+  const sectionPad = isMobile
+    ? "3.5rem 1.25rem"
+    : isTablet
+    ? "5rem 4%"
+    : "6rem 5%";
+
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
-        :root{
-          --bg:#050508;--surface:#0d0d14;--card:#111119;--card2:#161621;
-          --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
-          --accent:#00e5a0;--adim:rgba(0,229,160,0.12);
-          --accent2:#7c6ff7;--a2dim:rgba(124,111,247,0.12);
-          --accent3:#f5a623;
-          --text:#eeeef5;--muted:#7878a0;--dim:#3a3a55;
-          --ff:'Syne',sans-serif;--fm:'JetBrains Mono',monospace;
-        }
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        body{background:var(--bg);color:var(--text);font-family:var(--ff);font-size:16px;line-height:1.6;overflow-x:hidden}
-        @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,229,160,0.4)}50%{opacity:0.5;box-shadow:0 0 0 8px rgba(0,229,160,0)}}
-        @keyframes slideIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        @keyframes livep{0%,100%{box-shadow:0 0 0 0 rgba(0,229,160,0.5)}50%{box-shadow:0 0 0 8px rgba(0,229,160,0)}}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-        .av-ring::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,#00e5a0,#7c6ff7);z-index:-1;opacity:0.25;animation:spin 6s linear infinite}
-        .live-dot{animation:livep 2s ease-in-out infinite}
-        .blink-dot{animation:blink 2s ease-in-out infinite}
-        .hero-n1{animation:slideIn 0.7s 0.3s both}
-        .hero-n2{animation:slideIn 0.7s 0.5s both}
-        .hero-n3{animation:slideIn 0.7s 0.7s both}
-        .hcard-anim{animation:slideIn 0.7s 0.9s both}
-        .sk-hover:hover{border-color:var(--border2) !important;transform:translateY(-4px)}
-        .sk-hover:hover .sk-topline{opacity:1 !important}
-        .card-hover:hover{border-color:var(--border2) !important;transform:translateY(-5px)}
-        .card-hover:hover .card-topline{opacity:1 !important}
-        .proj-hover:hover{border-color:var(--border2) !important;transform:translateY(-5px)}
-        .proj-hover:hover .proj-topline{opacity:1 !important}
-        .stat-hover:hover{border-color:var(--border2) !important;transform:translateY(-3px)}
-        .edu-hover:hover{border-color:var(--border2) !important;transform:translateY(-3px)}
-        .clink-hover:hover{border-color:var(--accent) !important;color:var(--accent) !important;background:var(--adim) !important;transform:translateX(5px)}
-        .clink-hover:hover .clink-icon{background:var(--adim) !important;border-color:rgba(0,229,160,0.3) !important}
-        .nav-a:hover{color:var(--accent) !important}
-        .nav-a:hover .nav-underline{width:100% !important}
-        .chip-item:hover,.chip-hi{border-color:rgba(0,229,160,0.3) !important;color:var(--accent) !important;background:var(--adim) !important}
-        .sk-tag-hot,.sk-tag:hover{background:var(--adim) !important;border-color:rgba(0,229,160,0.25) !important;color:var(--accent) !important}
-        .bp-btn:hover{background:#1afdb3 !important;transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,229,160,0.25)}
-        .bg-btn:hover{border-color:var(--accent2) !important;color:var(--accent2) !important;background:var(--a2dim) !important}
-        .clink-ext:hover{gap:0.75rem !important}
-        input,textarea{outline:none}
-        input:focus,textarea:focus{border-color:var(--accent) !important;box-shadow:0 0 0 2px rgba(0,229,160,0.1) !important}
-        @media(max-width:900px){
-          .hero-grid{grid-template-columns:1fr !important}
-          .hcard-wrap{display:none !important}
-          .about-grid{grid-template-columns:1fr !important;gap:2.5rem !important}
-          .contact-grid{grid-template-columns:1fr !important;gap:2.5rem !important}
-          .edu-grid{grid-template-columns:1fr !important}
-        }
-        @media(max-width:680px){
-          .nav-desktop{display:none !important}
-          .nav-mobile-btn{display:flex !important}
-          .footer-inner{flex-direction:column;gap:0.8rem;text-align:center}
-        }
-        @media(min-width:681px){
-          .nav-mobile-btn{display:none !important}
-          .mobile-menu{display:none !important}
-        }
-      `}</style>
-
-      {/* BG GRID */}
+      {/* BG */}
       <div
         style={{
           position: "fixed",
@@ -714,7 +687,7 @@ export default function App() {
         }}
       />
 
-      {/* SCROLL PROGRESS */}
+      {/* PROGRESS BAR */}
       <div
         style={{
           position: "fixed",
@@ -729,7 +702,7 @@ export default function App() {
         }}
       />
 
-      {/* NAV */}
+      {/* ── NAV ── */}
       <nav
         style={{
           position: "fixed",
@@ -740,8 +713,8 @@ export default function App() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "1rem 5%",
-          background: "rgba(5,5,8,0.82)",
+          padding: `0.85rem ${px}`,
+          background: "rgba(5,5,8,0.85)",
           backdropFilter: "blur(24px)",
           borderBottom: "1px solid var(--border)",
         }}
@@ -749,115 +722,122 @@ export default function App() {
         <button
           onClick={() => scrollTo("about")}
           style={{
-            background: "none",
+            background: "linear-gradient(135deg,var(--accent),var(--accent2))",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
             border: "none",
             cursor: "pointer",
             fontFamily: "var(--ff)",
             fontWeight: 800,
-            fontSize: "1.3rem",
-            background: "linear-gradient(135deg,var(--accent),var(--accent2))",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            fontSize: "1.2rem",
             letterSpacing: "-0.03em",
+            padding: 0,
           }}
         >
           AA.
         </button>
 
-        {/* Desktop nav */}
-        <ul
-          className="nav-desktop"
-          style={{ display: "flex", gap: "2rem", listStyle: "none" }}
-        >
-          {NAV_LINKS.map((l) => (
-            <li key={l.href}>
-              <button
-                onClick={() => scrollTo(l.href)}
-                className="nav-a"
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  color:
-                    activeSection === l.href ? "var(--accent)" : "var(--muted)",
-                  fontFamily: "var(--fm)",
-                  fontSize: "0.72rem",
-                  letterSpacing: "0.08em",
-                  transition: "color 0.2s",
-                  position: "relative",
-                  paddingBottom: 2,
-                }}
-              >
-                {l.label}
-                <div
-                  className="nav-underline"
+        {/* Desktop links */}
+        {!isMobile && (
+          <ul
+            style={{
+              display: "flex",
+              gap: isTablet ? "1.5rem" : "2rem",
+              listStyle: "none",
+            }}
+          >
+            {NAV_LINKS.map((l) => (
+              <li key={l.href}>
+                <button
+                  onClick={() => scrollTo(l.href)}
+                  className="nav-a"
                   style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    width: activeSection === l.href ? "100%" : 0,
-                    height: 1,
-                    background: "var(--accent)",
-                    transition: "width 0.3s",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color:
+                      activeSection === l.href
+                        ? "var(--accent)"
+                        : "var(--muted)",
+                    fontFamily: "var(--fm)",
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.08em",
+                    transition: "color 0.2s",
+                    position: "relative",
+                    paddingBottom: 2,
                   }}
-                />
-              </button>
-            </li>
-          ))}
-        </ul>
+                >
+                  {l.label}
+                  <div
+                    className="nav-ul"
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      width: activeSection === l.href ? "100%" : 0,
+                      height: 1,
+                      background: "var(--accent)",
+                      transition: "width 0.3s",
+                    }}
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* Mobile hamburger */}
-        <button
-          className="nav-mobile-btn"
-          onClick={() => setMobileOpen((p) => !p)}
-          style={{
-            background: "none",
-            border: "1px solid var(--border2)",
-            borderRadius: 6,
-            padding: "0.4rem 0.6rem",
-            cursor: "pointer",
-            color: "var(--text)",
-            display: "none",
-            flexDirection: "column",
-            gap: 4,
-          }}
-        >
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              style={{
-                width: 18,
-                height: 1.5,
-                background: "var(--text)",
-                transition: "all 0.2s",
-                transform: mobileOpen
-                  ? i === 0
-                    ? "rotate(45deg) translate(4px,4px)"
-                    : i === 2
-                    ? "rotate(-45deg) translate(4px,-4px)"
-                    : "scaleX(0)"
-                  : "none",
-              }}
-            />
-          ))}
-        </button>
-
-        {/* Mobile dropdown */}
-        {mobileOpen && (
-          <div
-            className="mobile-menu"
+        {isMobile && (
+          <button
+            onClick={() => setMobileOpen((p) => !p)}
             style={{
-              position: "fixed",
-              top: 60,
-              left: 0,
-              right: 0,
-              background: "rgba(5,5,8,0.97)",
-              backdropFilter: "blur(24px)",
-              borderBottom: "1px solid var(--border)",
-              padding: "1rem 5% 1.5rem",
+              background: "none",
+              border: "1px solid var(--border2)",
+              borderRadius: 6,
+              padding: "0.4rem 0.55rem",
+              cursor: "pointer",
               display: "flex",
               flexDirection: "column",
-              gap: "0.75rem",
+              gap: 4,
+            }}
+          >
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                style={{
+                  width: 18,
+                  height: 1.5,
+                  background: "var(--text)",
+                  transition: "all 0.25s",
+                  transform: mobileOpen
+                    ? i === 0
+                      ? "rotate(45deg) translate(3px,4px)"
+                      : i === 2
+                      ? "rotate(-45deg) translate(3px,-4px)"
+                      : "scaleX(0)"
+                    : "none",
+                }}
+              />
+            ))}
+          </button>
+        )}
+
+        {/* Mobile menu drawer */}
+        {isMobile && mobileOpen && (
+          <div
+            style={{
+              position: "fixed",
+              top: 53,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "rgba(5,5,8,0.97)",
+              backdropFilter: "blur(24px)",
+              zIndex: 199,
+              display: "flex",
+              flexDirection: "column",
+              padding: "2rem 1.5rem",
+              gap: "0.25rem",
             }}
           >
             {NAV_LINKS.map((l) => (
@@ -871,40 +851,72 @@ export default function App() {
                   color:
                     activeSection === l.href ? "var(--accent)" : "var(--muted)",
                   fontFamily: "var(--fm)",
-                  fontSize: "0.82rem",
+                  fontSize: "1rem",
                   letterSpacing: "0.08em",
                   textAlign: "left",
-                  padding: "0.4rem 0",
+                  padding: "0.9rem 0",
+                  borderBottom: "1px solid var(--border)",
+                  width: "100%",
                 }}
               >
+                <span
+                  style={{
+                    color: "var(--dim)",
+                    marginRight: "0.75rem",
+                    fontSize: "0.7rem",
+                  }}
+                >
+                  {NAV_LINKS.indexOf(l) + 1 < 10
+                    ? `0${NAV_LINKS.indexOf(l) + 1}`
+                    : NAV_LINKS.indexOf(l) + 1}
+                </span>
                 {l.label}
               </button>
             ))}
+            <div style={{ marginTop: "auto", paddingTop: "2rem" }}>
+              <a
+                href="mailto:developerarslan4@gmail.com"
+                style={{
+                  display: "block",
+                  background: "var(--accent)",
+                  color: "#050508",
+                  fontFamily: "var(--fm)",
+                  fontSize: "0.82rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.06em",
+                  padding: "0.85rem",
+                  borderRadius: 6,
+                  textDecoration: "none",
+                  textAlign: "center",
+                }}
+              >
+                Get in touch
+              </a>
+            </div>
           </div>
         )}
       </nav>
 
-      {/* HERO */}
+      {/* ── HERO ── */}
       <section
         id="hero"
         style={{
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",
-          padding: "8rem 5% 5rem",
+          padding: isMobile ? "7rem 1.25rem 4rem" : "8rem 5% 5rem",
           position: "relative",
           zIndex: 1,
         }}
       >
         <div
-          className="hero-grid"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
             display: "grid",
-            gridTemplateColumns: "1fr 260px",
-            gap: "4rem",
+            gridTemplateColumns: isTablet ? "1fr" : "1fr 260px",
+            gap: isMobile ? "2rem" : "4rem",
             alignItems: "center",
           }}
         >
@@ -913,20 +925,20 @@ export default function App() {
               className="hero-n1"
               style={{
                 fontFamily: "var(--fm)",
-                fontSize: "0.72rem",
+                fontSize: isMobile ? "0.65rem" : "0.72rem",
                 color: "var(--accent)",
                 letterSpacing: "0.2em",
-                marginBottom: "1.5rem",
+                marginBottom: "1.2rem",
                 display: "flex",
                 alignItems: "center",
-                gap: "0.75rem",
+                gap: "0.6rem",
               }}
             >
               <span
                 className="blink-dot"
                 style={{
-                  width: 7,
-                  height: 7,
+                  width: 6,
+                  height: 6,
                   borderRadius: "50%",
                   background: "var(--accent)",
                   flexShrink: 0,
@@ -934,14 +946,17 @@ export default function App() {
               />
               OPEN TO WORK · VILNIUS, LITHUANIA
             </div>
+
             <h1
               style={{
                 fontFamily: "var(--ff)",
                 fontWeight: 800,
-                fontSize: "clamp(4rem,9vw,8rem)",
+                fontSize: isMobile
+                  ? "clamp(3rem,14vw,4.5rem)"
+                  : "clamp(4rem,9vw,8rem)",
                 lineHeight: 0.9,
                 letterSpacing: "-0.04em",
-                marginBottom: "1.5rem",
+                marginBottom: "1.2rem",
               }}
             >
               <span
@@ -973,13 +988,14 @@ export default function App() {
                 Engineer.
               </span>
             </h1>
+
             <p
               style={{
                 maxWidth: 480,
                 color: "var(--muted)",
-                fontSize: "0.96rem",
+                fontSize: isMobile ? "0.9rem" : "0.96rem",
                 lineHeight: 1.85,
-                marginBottom: "2.5rem",
+                marginBottom: "2rem",
               }}
             >
               CS graduate based in{" "}
@@ -994,15 +1010,15 @@ export default function App() {
               <strong style={{ color: "var(--text)", fontWeight: 600 }}>
                 DevOps & Cloud
               </strong>
-              . Currently pursuing a Master's while actively building Azure,
-              Linux, and CI/CD skills.
+              .
             </p>
+
             <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: "0.5rem",
-                marginBottom: "2.8rem",
+                gap: "0.4rem",
+                marginBottom: "2rem",
               }}
             >
               {CHIPS.map((c) => (
@@ -1012,11 +1028,11 @@ export default function App() {
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "0.45rem",
+                    gap: "0.35rem",
                     fontFamily: "var(--fm)",
-                    fontSize: "0.68rem",
-                    letterSpacing: "0.05em",
-                    padding: "0.32rem 0.85rem",
+                    fontSize: isMobile ? "0.62rem" : "0.68rem",
+                    letterSpacing: "0.04em",
+                    padding: isMobile ? "0.28rem 0.7rem" : "0.32rem 0.85rem",
                     borderRadius: 999,
                     border: "1px solid var(--border2)",
                     color: "var(--muted)",
@@ -1024,22 +1040,23 @@ export default function App() {
                     transition: "all 0.25s",
                   }}
                 >
-                  <span style={{ width: 11, height: 11, flexShrink: 0 }}>
+                  <span style={{ width: 10, height: 10, flexShrink: 0 }}>
                     {c.icon}
                   </span>
                   {c.label}
                 </span>
               ))}
             </div>
-            <div style={{ display: "flex", gap: "0.85rem", flexWrap: "wrap" }}>
+
+            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               <button
                 onClick={() => scrollTo("contact")}
                 className="bp-btn"
                 style={{
                   fontFamily: "var(--fm)",
-                  fontSize: "0.78rem",
+                  fontSize: isMobile ? "0.75rem" : "0.78rem",
                   letterSpacing: "0.06em",
-                  padding: "0.9rem 2.2rem",
+                  padding: isMobile ? "0.8rem 1.6rem" : "0.9rem 2.2rem",
                   background: "var(--accent)",
                   color: "#050508",
                   border: "none",
@@ -1072,9 +1089,9 @@ export default function App() {
                 className="bg-btn"
                 style={{
                   fontFamily: "var(--fm)",
-                  fontSize: "0.78rem",
+                  fontSize: isMobile ? "0.75rem" : "0.78rem",
                   letterSpacing: "0.06em",
-                  padding: "0.9rem 2.2rem",
+                  padding: isMobile ? "0.8rem 1.6rem" : "0.9rem 2.2rem",
                   background: "transparent",
                   color: "var(--text)",
                   border: "1px solid var(--border2)",
@@ -1104,141 +1121,142 @@ export default function App() {
             </div>
           </div>
 
-          {/* Hero card */}
-          <div
-            className="hcard-wrap hcard-anim"
-            style={{
-              background: "var(--card)",
-              border: "1px solid var(--border)",
-              borderRadius: 20,
-              padding: "2rem",
-              textAlign: "center",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
+          {/* Hero card — hidden on tablet/mobile */}
+          {!isTablet && (
             <div
+              className="hcard-anim"
               style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "radial-gradient(circle at 50% 0%,rgba(0,229,160,0.08) 0%,transparent 60%)",
-                pointerEvents: "none",
-              }}
-            />
-            <div
-              className="av-ring"
-              style={{
-                width: 84,
-                height: 84,
-                borderRadius: "50%",
-                margin: "0 auto 1.2rem",
-                background:
-                  "linear-gradient(135deg,var(--accent),var(--accent2))",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "1.8rem",
-                fontWeight: 800,
-                color: "#050508",
+                background: "var(--card)",
+                border: "1px solid var(--border)",
+                borderRadius: 20,
+                padding: "2rem",
+                textAlign: "center",
                 position: "relative",
-                zIndex: 1,
+                overflow: "hidden",
               }}
             >
-              AA
-            </div>
-            <div
-              style={{
-                fontWeight: 700,
-                fontSize: "0.95rem",
-                marginBottom: "0.2rem",
-              }}
-            >
-              Arslan Ali
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--fm)",
-                fontSize: "0.65rem",
-                color: "var(--accent)",
-                letterSpacing: "0.1em",
-              }}
-            >
-              IT & DEVOPS ENGINEER
-            </div>
-            <div
-              style={{
-                height: 1,
-                background: "var(--border)",
-                margin: "1.2rem 0",
-              }}
-            />
-            {[
-              ["Location", "Vilnius, LT 🇱🇹"],
-              ["Degree", "BSc + MSc"],
-              ["Exp.", "1+ years"],
-              ["Available", "Immediately"],
-            ].map(([k, v]) => (
               <div
-                key={k}
                 style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "radial-gradient(circle at 50% 0%,rgba(0,229,160,0.08) 0%,transparent 60%)",
+                  pointerEvents: "none",
+                }}
+              />
+              <div
+                className="av-ring"
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: "50%",
+                  margin: "0 auto 1.1rem",
+                  background:
+                    "linear-gradient(135deg,var(--accent),var(--accent2))",
                   display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "0.78rem",
-                  marginBottom: "0.6rem",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "1.7rem",
+                  fontWeight: 800,
+                  color: "#050508",
+                  position: "relative",
+                  zIndex: 1,
                 }}
               >
-                <span style={{ color: "var(--muted)" }}>{k}</span>
-                <span style={{ color: "var(--text)", fontWeight: 600 }}>
-                  {v}
+                AA
+              </div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: "0.92rem",
+                  marginBottom: "0.2rem",
+                }}
+              >
+                Arslan Ali
+              </div>
+              <div
+                style={{
+                  fontFamily: "var(--fm)",
+                  fontSize: "0.62rem",
+                  color: "var(--accent)",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                IT & DEVOPS ENGINEER
+              </div>
+              <div
+                style={{
+                  height: 1,
+                  background: "var(--border)",
+                  margin: "1.1rem 0",
+                }}
+              />
+              {[
+                ["Location", "Vilnius, LT 🇱🇹"],
+                ["Degree", "BSc + MSc"],
+                ["Exp.", "1+ years"],
+                ["Available", "Immediately"],
+              ].map(([k, v]) => (
+                <div
+                  key={k}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontSize: "0.76rem",
+                    marginBottom: "0.55rem",
+                  }}
+                >
+                  <span style={{ color: "var(--muted)" }}>{k}</span>
+                  <span style={{ color: "var(--text)", fontWeight: 600 }}>
+                    {v}
+                  </span>
+                </div>
+              ))}
+              <div>
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.45rem",
+                    fontFamily: "var(--fm)",
+                    fontSize: "0.6rem",
+                    color: "var(--accent)",
+                    background: "var(--adim)",
+                    border: "1px solid rgba(0,229,160,0.2)",
+                    padding: "0.25rem 0.7rem",
+                    borderRadius: 999,
+                    marginTop: "0.8rem",
+                  }}
+                >
+                  <span
+                    className="blink-dot"
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: "var(--accent)",
+                    }}
+                  />
+                  OPEN TO WORK
                 </span>
               </div>
-            ))}
-            <div style={{ textAlign: "center" }}>
-              <span
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  fontFamily: "var(--fm)",
-                  fontSize: "0.63rem",
-                  color: "var(--accent)",
-                  background: "var(--adim)",
-                  border: "1px solid rgba(0,229,160,0.2)",
-                  padding: "0.28rem 0.75rem",
-                  borderRadius: 999,
-                  marginTop: "0.8rem",
-                }}
-              >
-                <span
-                  className="blink-dot"
-                  style={{
-                    width: 5,
-                    height: 5,
-                    borderRadius: "50%",
-                    background: "var(--accent)",
-                  }}
-                />
-                OPEN TO WORK
-              </span>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* ABOUT */}
+      {/* ── ABOUT ── */}
       <section
         id="about"
-        style={{ padding: "6rem 5%", position: "relative", zIndex: 1 }}
+        style={{ padding: sectionPad, position: "relative", zIndex: 1 }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionHeader num="01" title="About Me" />
           <div
-            className="about-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "1.1fr 1fr",
-              gap: "5rem",
+              gridTemplateColumns: isTablet ? "1fr" : "1.1fr 1fr",
+              gap: isMobile ? "2rem" : "5rem",
               alignItems: "start",
             }}
           >
@@ -1246,7 +1264,7 @@ export default function App() {
               <div
                 style={{
                   color: "var(--muted)",
-                  fontSize: "0.96rem",
+                  fontSize: isMobile ? "0.9rem" : "0.96rem",
                   lineHeight: 1.9,
                 }}
               >
@@ -1264,7 +1282,7 @@ export default function App() {
                     Management at KSU.
                   </>,
                   <>
-                    My professional background is in{" "}
+                    My background is in{" "}
                     <strong style={{ color: "var(--text)", fontWeight: 600 }}>
                       full-stack web development
                     </strong>{" "}
@@ -1291,10 +1309,6 @@ export default function App() {
                     </strong>
                     .
                   </>,
-                  <>
-                    I thrive in fast-paced environments, adapt quickly, and
-                    bring genuine curiosity to every technical challenge.
-                  </>,
                 ].map((p, i) => (
                   <p key={i} style={{ marginTop: i > 0 ? "1rem" : 0 }}>
                     {p}
@@ -1307,7 +1321,7 @@ export default function App() {
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
-                  gap: "1rem",
+                  gap: "0.85rem",
                 }}
               >
                 {STATS.map((s) => (
@@ -1318,14 +1332,14 @@ export default function App() {
                       background: "var(--card)",
                       border: "1px solid var(--border)",
                       borderRadius: 12,
-                      padding: "1.5rem",
+                      padding: isMobile ? "1.1rem" : "1.5rem",
                       transition: "all 0.25s",
                     }}
                   >
                     <div
                       style={{
                         fontFamily: "var(--ff)",
-                        fontSize: "2.2rem",
+                        fontSize: isMobile ? "1.8rem" : "2.2rem",
                         fontWeight: 800,
                         color: "var(--accent)",
                         lineHeight: 1,
@@ -1337,7 +1351,7 @@ export default function App() {
                     <div
                       style={{
                         fontFamily: "var(--fm)",
-                        fontSize: "0.65rem",
+                        fontSize: "0.6rem",
                         color: "var(--muted)",
                         letterSpacing: "0.08em",
                       }}
@@ -1353,16 +1367,16 @@ export default function App() {
                       "linear-gradient(135deg,rgba(0,229,160,0.07),rgba(124,111,247,0.07))",
                     border: "1px solid rgba(0,229,160,0.18)",
                     borderRadius: 12,
-                    padding: "1.2rem 1.5rem",
+                    padding: "1.1rem 1.3rem",
                     display: "flex",
                     alignItems: "center",
-                    gap: "1rem",
+                    gap: "0.85rem",
                   }}
                 >
                   <div
                     style={{
-                      width: 40,
-                      height: 40,
+                      width: 38,
+                      height: 38,
                       background: "rgba(0,229,160,0.12)",
                       borderRadius: 8,
                       display: "flex",
@@ -1372,8 +1386,8 @@ export default function App() {
                     }}
                   >
                     <svg
-                      width="20"
-                      height="20"
+                      width="18"
+                      height="18"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="#00e5a0"
@@ -1388,7 +1402,7 @@ export default function App() {
                     <strong
                       style={{
                         color: "var(--accent)",
-                        fontSize: "0.88rem",
+                        fontSize: "0.84rem",
                         display: "block",
                         fontWeight: 600,
                       }}
@@ -1396,7 +1410,7 @@ export default function App() {
                       Microsoft Azure Cloud Shell
                     </strong>
                     <span
-                      style={{ color: "var(--muted)", fontSize: "0.78rem" }}
+                      style={{ color: "var(--muted)", fontSize: "0.73rem" }}
                     >
                       Certificate · April 2026 · Microsoft Learn
                     </span>
@@ -1408,10 +1422,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* SKILLS */}
+      {/* ── SKILLS ── */}
       <section
         id="skills"
-        style={{ padding: "6rem 5%", position: "relative", zIndex: 1 }}
+        style={{ padding: sectionPad, position: "relative", zIndex: 1 }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionHeader num="02" title="Skills" />
@@ -1419,8 +1433,10 @@ export default function App() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit,minmax(255px,1fr))",
-                gap: "1.2rem",
+                gridTemplateColumns: isMobile
+                  ? "1fr"
+                  : "repeat(auto-fit,minmax(240px,1fr))",
+                gap: "1rem",
               }}
             >
               {SKILL_GROUPS.map((g) => (
@@ -1431,14 +1447,14 @@ export default function App() {
                     background: "var(--card)",
                     border: "1px solid var(--border)",
                     borderRadius: 14,
-                    padding: "1.8rem",
+                    padding: isMobile ? "1.4rem" : "1.8rem",
                     transition: "all 0.3s",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   <div
-                    className="sk-topline"
+                    className="topline"
                     style={{
                       position: "absolute",
                       top: 0,
@@ -1455,15 +1471,15 @@ export default function App() {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "0.7rem",
+                      gap: "0.6rem",
                       fontFamily: "var(--fm)",
-                      fontSize: "0.66rem",
+                      fontSize: "0.63rem",
                       color: "var(--accent)",
                       letterSpacing: "0.12em",
-                      marginBottom: "1.3rem",
+                      marginBottom: "1.1rem",
                     }}
                   >
-                    <span style={{ width: 15, height: 15, flexShrink: 0 }}>
+                    <span style={{ width: 14, height: 14, flexShrink: 0 }}>
                       {g.icon}
                     </span>
                     {g.title}
@@ -1476,19 +1492,15 @@ export default function App() {
                     />
                   </div>
                   <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "0.45rem",
-                    }}
+                    style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}
                   >
                     {g.tags.map((t) => (
                       <span
                         key={t.label}
                         className={`sk-tag${t.hot ? " sk-tag-hot" : ""}`}
                         style={{
-                          fontSize: "0.73rem",
-                          padding: "0.25rem 0.7rem",
+                          fontSize: "0.7rem",
+                          padding: "0.22rem 0.65rem",
                           borderRadius: 4,
                           background: "rgba(255,255,255,0.04)",
                           color: "var(--text)",
@@ -1509,15 +1521,20 @@ export default function App() {
         </div>
       </section>
 
-      {/* EXPERIENCE */}
+      {/* ── EXPERIENCE ── */}
       <section
         id="experience"
-        style={{ padding: "6rem 5%", position: "relative", zIndex: 1 }}
+        style={{ padding: sectionPad, position: "relative", zIndex: 1 }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionHeader num="03" title="Experience" />
           <Reveal>
-            <div style={{ position: "relative", paddingLeft: "2rem" }}>
+            <div
+              style={{
+                position: "relative",
+                paddingLeft: isMobile ? "1.5rem" : "2rem",
+              }}
+            >
               <div
                 style={{
                   position: "absolute",
@@ -1534,15 +1551,15 @@ export default function App() {
                   key={i}
                   style={{
                     position: "relative",
-                    paddingLeft: "2.5rem",
-                    paddingBottom: i < EXPERIENCE.length - 1 ? "3.5rem" : 0,
+                    paddingLeft: isMobile ? "1.75rem" : "2.5rem",
+                    paddingBottom: i < EXPERIENCE.length - 1 ? "3rem" : 0,
                   }}
                 >
                   <div
                     className={e.live ? "live-dot" : ""}
                     style={{
                       position: "absolute",
-                      left: "-2rem",
+                      left: isMobile ? "-1.5rem" : "-2rem",
                       top: "0.6rem",
                       width: 10,
                       height: 10,
@@ -1554,10 +1571,10 @@ export default function App() {
                   <div
                     style={{
                       fontFamily: "var(--fm)",
-                      fontSize: "0.66rem",
+                      fontSize: "0.62rem",
                       color: "var(--dim)",
                       letterSpacing: "0.1em",
-                      marginBottom: "0.5rem",
+                      marginBottom: "0.45rem",
                     }}
                   >
                     {e.date}
@@ -1565,28 +1582,40 @@ export default function App() {
                   <div
                     style={{
                       fontFamily: "var(--ff)",
-                      fontSize: "1.25rem",
+                      fontSize: isMobile ? "1.05rem" : "1.2rem",
                       fontWeight: 700,
                       letterSpacing: "-0.02em",
-                      marginBottom: "0.25rem",
+                      marginBottom: e.roleDetail ? "0.1rem" : "0.25rem",
                     }}
                   >
                     {e.role}
                   </div>
+                  {e.roleDetail && (
+                    <div
+                      style={{
+                        fontSize: "0.85rem",
+                        color: "var(--muted)",
+                        marginBottom: "0.25rem",
+                      }}
+                    >
+                      {e.roleDetail}
+                    </div>
+                  )}
                   <div
                     style={{
                       fontFamily: "var(--fm)",
-                      fontSize: "0.76rem",
+                      fontSize: "0.73rem",
                       color: "var(--accent2)",
-                      marginBottom: "1rem",
+                      marginBottom: "0.9rem",
                       display: "flex",
                       alignItems: "center",
-                      gap: "0.5rem",
+                      gap: "0.45rem",
+                      flexWrap: "wrap",
                     }}
                   >
                     <svg
-                      width="11"
-                      height="11"
+                      width="10"
+                      height="10"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -1601,16 +1630,16 @@ export default function App() {
                     style={{
                       listStyle: "none",
                       color: "var(--muted)",
-                      fontSize: "0.87rem",
+                      fontSize: isMobile ? "0.84rem" : "0.87rem",
                     }}
                   >
                     {e.bullets.map((b, j) => (
                       <li
                         key={j}
                         style={{
-                          padding: "0.3rem 0",
+                          padding: "0.28rem 0",
                           display: "flex",
-                          gap: "0.75rem",
+                          gap: "0.65rem",
                           alignItems: "flex-start",
                           lineHeight: 1.65,
                         }}
@@ -1619,7 +1648,7 @@ export default function App() {
                           style={{
                             color: "var(--accent)",
                             flexShrink: 0,
-                            fontSize: "0.72rem",
+                            fontSize: "0.7rem",
                             marginTop: "0.1rem",
                           }}
                         >
@@ -1636,10 +1665,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* COURSES */}
+      {/* ── COURSES ── */}
       <section
         id="courses"
-        style={{ padding: "6rem 5%", position: "relative", zIndex: 1 }}
+        style={{ padding: sectionPad, position: "relative", zIndex: 1 }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionHeader num="04" title="Courses & Certifications" />
@@ -1647,8 +1676,12 @@ export default function App() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit,minmax(310px,1fr))",
-                gap: "1.5rem",
+                gridTemplateColumns: isMobile
+                  ? "1fr"
+                  : isTablet
+                  ? "1fr 1fr"
+                  : "repeat(3,1fr)",
+                gap: "1.2rem",
               }}
             >
               {COURSES.map((c) => (
@@ -1659,17 +1692,17 @@ export default function App() {
                     background: "var(--card)",
                     border: "1px solid var(--border)",
                     borderRadius: 14,
-                    padding: "2rem",
+                    padding: isMobile ? "1.5rem" : "1.8rem",
                     transition: "all 0.3s",
                     position: "relative",
                     overflow: "hidden",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "0.9rem",
+                    gap: "0.85rem",
                   }}
                 >
                   <div
-                    className="card-topline"
+                    className="topline"
                     style={{
                       position: "absolute",
                       top: 0,
@@ -1688,9 +1721,9 @@ export default function App() {
                       top: "1rem",
                       right: "1rem",
                       fontFamily: "var(--fm)",
-                      fontSize: "0.58rem",
+                      fontSize: "0.55rem",
                       letterSpacing: "0.08em",
-                      padding: "0.18rem 0.6rem",
+                      padding: "0.18rem 0.55rem",
                       borderRadius: 999,
                       ...(c.badgeType === "done"
                         ? {
@@ -1711,7 +1744,7 @@ export default function App() {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "1rem",
+                      gap: "0.85rem",
                     }}
                   >
                     <CourseLogo type={c.logoType} />
@@ -1719,10 +1752,10 @@ export default function App() {
                       <div
                         style={{
                           fontFamily: "var(--fm)",
-                          fontSize: "0.62rem",
+                          fontSize: "0.58rem",
                           letterSpacing: "0.1em",
                           color: "var(--muted)",
-                          marginBottom: "0.1rem",
+                          marginBottom: "0.15rem",
                         }}
                       >
                         {c.provider}
@@ -1730,10 +1763,11 @@ export default function App() {
                       <div
                         style={{
                           fontFamily: "var(--ff)",
-                          fontSize: "1.05rem",
+                          fontSize: "0.95rem",
                           fontWeight: 700,
                           letterSpacing: "-0.02em",
                           lineHeight: 1.3,
+                          paddingRight: "3rem",
                         }}
                       >
                         {c.title}
@@ -1742,7 +1776,7 @@ export default function App() {
                   </div>
                   <div
                     style={{
-                      fontSize: "0.83rem",
+                      fontSize: "0.82rem",
                       color: "var(--muted)",
                       lineHeight: 1.75,
                       flex: 1,
@@ -1754,7 +1788,7 @@ export default function App() {
                     style={{
                       display: "flex",
                       flexWrap: "wrap",
-                      gap: "0.38rem",
+                      gap: "0.35rem",
                     }}
                   >
                     {c.tags.map((t) => (
@@ -1762,8 +1796,8 @@ export default function App() {
                         key={t}
                         style={{
                           fontFamily: "var(--fm)",
-                          fontSize: "0.63rem",
-                          padding: "0.18rem 0.55rem",
+                          fontSize: "0.6rem",
+                          padding: "0.16rem 0.5rem",
                           borderRadius: 3,
                           background: "rgba(255,255,255,0.04)",
                           color: "var(--dim)",
@@ -1782,9 +1816,9 @@ export default function App() {
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
-                      gap: "0.45rem",
+                      gap: "0.4rem",
                       fontFamily: "var(--fm)",
-                      fontSize: "0.7rem",
+                      fontSize: "0.68rem",
                       color: "var(--accent)",
                       textDecoration: "none",
                       transition: "gap 0.2s",
@@ -1793,8 +1827,8 @@ export default function App() {
                   >
                     {c.linkLabel}
                     <svg
-                      width="11"
-                      height="11"
+                      width="10"
+                      height="10"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -1811,10 +1845,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* PROJECTS */}
+      {/* ── PROJECTS ── */}
       <section
         id="projects"
-        style={{ padding: "6rem 5%", position: "relative", zIndex: 1 }}
+        style={{ padding: sectionPad, position: "relative", zIndex: 1 }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionHeader num="05" title="Projects" />
@@ -1822,8 +1856,10 @@ export default function App() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit,minmax(290px,1fr))",
-                gap: "1.5rem",
+                gridTemplateColumns: isMobile
+                  ? "1fr"
+                  : "repeat(auto-fit,minmax(280px,1fr))",
+                gap: "1.2rem",
               }}
             >
               {PROJECTS.map((p) => (
@@ -1834,14 +1870,14 @@ export default function App() {
                     background: "var(--card)",
                     border: "1px solid var(--border)",
                     borderRadius: 14,
-                    padding: "2rem",
+                    padding: isMobile ? "1.5rem" : "1.8rem",
                     transition: "all 0.3s",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   <div
-                    className="proj-topline"
+                    className="topline"
                     style={{
                       position: "absolute",
                       top: 0,
@@ -1857,35 +1893,35 @@ export default function App() {
                   <div
                     style={{
                       fontFamily: "var(--fm)",
-                      fontSize: "0.63rem",
+                      fontSize: "0.6rem",
                       color: "var(--dim)",
                       letterSpacing: "0.12em",
-                      marginBottom: "0.8rem",
+                      marginBottom: "0.75rem",
                       display: "flex",
                       alignItems: "center",
-                      gap: "0.5rem",
+                      gap: "0.45rem",
                     }}
                   >
-                    <span style={{ width: 13, height: 13 }}>{p.icon}</span>
+                    <span style={{ width: 12, height: 12 }}>{p.icon}</span>
                     PROJECT / {p.num}
                   </div>
                   <div
                     style={{
                       fontFamily: "var(--ff)",
-                      fontSize: "1.15rem",
+                      fontSize: isMobile ? "1.05rem" : "1.15rem",
                       fontWeight: 700,
                       letterSpacing: "-0.02em",
-                      marginBottom: "0.75rem",
+                      marginBottom: "0.65rem",
                     }}
                   >
                     {p.title}
                   </div>
                   <div
                     style={{
-                      fontSize: "0.84rem",
+                      fontSize: "0.83rem",
                       color: "var(--muted)",
                       lineHeight: 1.75,
-                      marginBottom: "1.3rem",
+                      marginBottom: "1.1rem",
                     }}
                   >
                     {p.desc}
@@ -1894,7 +1930,7 @@ export default function App() {
                     style={{
                       display: "flex",
                       flexWrap: "wrap",
-                      gap: "0.38rem",
+                      gap: "0.35rem",
                     }}
                   >
                     {p.tags.map((t) => (
@@ -1902,8 +1938,8 @@ export default function App() {
                         key={t}
                         style={{
                           fontFamily: "var(--fm)",
-                          fontSize: "0.63rem",
-                          padding: "0.2rem 0.55rem",
+                          fontSize: "0.6rem",
+                          padding: "0.18rem 0.5rem",
                           borderRadius: 3,
                           background: "rgba(255,255,255,0.04)",
                           color: "var(--dim)",
@@ -1923,9 +1959,9 @@ export default function App() {
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        gap: "0.45rem",
+                        gap: "0.4rem",
                         fontFamily: "var(--fm)",
-                        fontSize: "0.7rem",
+                        fontSize: "0.68rem",
                         color: "var(--accent)",
                         textDecoration: "none",
                         transition: "gap 0.2s",
@@ -1934,8 +1970,8 @@ export default function App() {
                     >
                       View project{" "}
                       <svg
-                        width="11"
-                        height="11"
+                        width="10"
+                        height="10"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -1953,20 +1989,19 @@ export default function App() {
         </div>
       </section>
 
-      {/* EDUCATION */}
+      {/* ── EDUCATION ── */}
       <section
         id="education"
-        style={{ padding: "6rem 5%", position: "relative", zIndex: 1 }}
+        style={{ padding: sectionPad, position: "relative", zIndex: 1 }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionHeader num="06" title="Education" />
           <Reveal>
             <div
-              className="edu-grid"
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "1.5rem",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: "1.2rem",
               }}
             >
               {EDUCATION.map((e) => (
@@ -1977,7 +2012,7 @@ export default function App() {
                     background: "var(--card)",
                     border: "1px solid var(--border)",
                     borderRadius: 14,
-                    padding: "2rem",
+                    padding: isMobile ? "1.5rem" : "2rem",
                     transition: "all 0.25s",
                     position: "relative",
                     overflow: "hidden",
@@ -2000,8 +2035,8 @@ export default function App() {
                     style={{
                       display: "inline-block",
                       fontFamily: "var(--fm)",
-                      fontSize: "0.6rem",
-                      padding: "0.18rem 0.65rem",
+                      fontSize: "0.58rem",
+                      padding: "0.16rem 0.6rem",
                       borderRadius: 999,
                       letterSpacing: "0.08em",
                       marginBottom: "0.8rem",
@@ -2023,7 +2058,7 @@ export default function App() {
                   <div
                     style={{
                       fontFamily: "var(--ff)",
-                      fontSize: "1.02rem",
+                      fontSize: isMobile ? "0.95rem" : "1.02rem",
                       fontWeight: 700,
                       letterSpacing: "-0.02em",
                       marginBottom: "0.4rem",
@@ -2034,17 +2069,18 @@ export default function App() {
                   <div
                     style={{
                       fontFamily: "var(--fm)",
-                      fontSize: "0.73rem",
+                      fontSize: "0.72rem",
                       color: "var(--accent2)",
                       marginBottom: "0.5rem",
                       display: "flex",
                       alignItems: "center",
                       gap: "0.4rem",
+                      flexWrap: "wrap",
                     }}
                   >
                     <svg
-                      width="11"
-                      height="11"
+                      width="10"
+                      height="10"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -2054,7 +2090,7 @@ export default function App() {
                     </svg>
                     {e.school}
                   </div>
-                  <div style={{ fontSize: "0.79rem", color: "var(--muted)" }}>
+                  <div style={{ fontSize: "0.78rem", color: "var(--muted)" }}>
                     {e.meta}
                   </div>
                 </div>
@@ -2064,37 +2100,37 @@ export default function App() {
         </div>
       </section>
 
-      {/* CONTACT */}
+      {/* ── CONTACT ── */}
       <section
         id="contact"
         style={{
-          padding: "6rem 5%",
+          padding: sectionPad,
           position: "relative",
           zIndex: 1,
           background: "var(--surface)",
         }}
       >
         <div
-          className="contact-grid"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "5rem",
+            gridTemplateColumns: isTablet ? "1fr" : "1fr 1fr",
+            gap: isMobile ? "2.5rem" : "5rem",
             alignItems: "start",
           }}
         >
-          {/* Left: CTA + contact links */}
           <Reveal dir="left">
             <h2
               style={{
                 fontFamily: "var(--ff)",
-                fontSize: "clamp(2.2rem,4vw,3.2rem)",
+                fontSize: isMobile
+                  ? "clamp(2rem,8vw,2.6rem)"
+                  : "clamp(2.2rem,4vw,3.2rem)",
                 fontWeight: 800,
                 letterSpacing: "-0.04em",
                 lineHeight: 1.1,
-                marginBottom: "1.2rem",
+                marginBottom: "1rem",
               }}
             >
               Let's build
@@ -2114,9 +2150,9 @@ export default function App() {
             <p
               style={{
                 color: "var(--muted)",
-                fontSize: "0.92rem",
+                fontSize: isMobile ? "0.88rem" : "0.92rem",
                 lineHeight: 1.85,
-                marginBottom: "2.2rem",
+                marginBottom: "1.8rem",
               }}
             >
               I'm actively seeking{" "}
@@ -2124,20 +2160,17 @@ export default function App() {
                 IT Administration
               </strong>{" "}
               and <strong style={{ color: "var(--text)" }}>DevOps</strong> roles
-              in Lithuania and across the EU. Whether you're hiring,
-              collaborating, or just want to connect — I'd love to hear from
-              you.
+              in Lithuania and across the EU.
             </p>
 
-            {/* Copy email button */}
             <button
               onClick={copyEmail}
               className="bp-btn"
               style={{
                 fontFamily: "var(--fm)",
-                fontSize: "0.78rem",
+                fontSize: isMobile ? "0.75rem" : "0.78rem",
                 letterSpacing: "0.06em",
-                padding: "0.9rem 2.2rem",
+                padding: isMobile ? "0.8rem 1.5rem" : "0.9rem 2rem",
                 background: "var(--accent)",
                 color: "#050508",
                 border: "none",
@@ -2148,7 +2181,9 @@ export default function App() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.5rem",
-                marginBottom: "2rem",
+                marginBottom: "1.8rem",
+                width: isMobile ? "100%" : "auto",
+                justifyContent: "center",
               }}
             >
               {copiedEmail ? (
@@ -2178,7 +2213,7 @@ export default function App() {
                     <rect x="9" y="9" width="13" height="13" rx="2" />
                     <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
                   </svg>
-                  Copy email
+                  Copy email address
                 </>
               )}
             </button>
@@ -2187,7 +2222,7 @@ export default function App() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.85rem",
+                gap: "0.75rem",
               }}
             >
               {CONTACT_LINKS.map((l) => (
@@ -2200,23 +2235,24 @@ export default function App() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "1rem",
+                    gap: "0.85rem",
                     textDecoration: "none",
                     color: "var(--text)",
-                    padding: "1.1rem 1.4rem",
+                    padding: isMobile ? "0.9rem 1.1rem" : "1rem 1.3rem",
                     background: "var(--card)",
                     border: "1px solid var(--border)",
                     borderRadius: 10,
                     transition: "all 0.25s",
-                    fontSize: "0.88rem",
+                    fontSize: isMobile ? "0.8rem" : "0.88rem",
+                    overflow: "hidden",
                   }}
                 >
                   <div
                     className="clink-icon"
                     style={{
-                      width: 34,
-                      height: 34,
-                      borderRadius: 8,
+                      width: 32,
+                      height: 32,
+                      borderRadius: 7,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -2226,53 +2262,61 @@ export default function App() {
                       transition: "all 0.25s",
                     }}
                   >
-                    <span style={{ width: 15, height: 15 }}>{l.icon}</span>
+                    <span style={{ width: 14, height: 14 }}>{l.icon}</span>
                   </div>
-                  {l.label}
+                  <span
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {l.label}
+                  </span>
                 </a>
               ))}
             </div>
           </Reveal>
 
-          {/* Right: Contact form */}
+          {/* Contact form */}
           <Reveal delay={150}>
             <div
               style={{
                 background: "var(--card)",
                 border: "1px solid var(--border)",
                 borderRadius: 16,
-                padding: "2.5rem",
+                padding: isMobile ? "1.5rem" : "2.2rem",
               }}
             >
               <div
                 style={{
                   fontFamily: "var(--fm)",
-                  fontSize: "0.7rem",
+                  fontSize: "0.68rem",
                   color: "var(--accent)",
                   letterSpacing: "0.12em",
-                  marginBottom: "1.5rem",
+                  marginBottom: "1.4rem",
                 }}
               >
                 SEND A MESSAGE
               </div>
               {formStatus === "sent" ? (
-                <div style={{ textAlign: "center", padding: "3rem 0" }}>
+                <div style={{ textAlign: "center", padding: "2.5rem 0" }}>
                   <div
                     style={{
-                      width: 56,
-                      height: 56,
+                      width: 52,
+                      height: 52,
                       borderRadius: "50%",
                       background: "var(--adim)",
                       border: "1px solid rgba(0,229,160,0.3)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      margin: "0 auto 1.2rem",
+                      margin: "0 auto 1.1rem",
                     }}
                   >
                     <svg
-                      width="24"
-                      height="24"
+                      width="22"
+                      height="22"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="var(--accent)"
@@ -2285,21 +2329,21 @@ export default function App() {
                     style={{
                       fontFamily: "var(--ff)",
                       fontWeight: 700,
-                      fontSize: "1.1rem",
+                      fontSize: "1.05rem",
                       marginBottom: "0.5rem",
                     }}
                   >
                     Message sent!
                   </div>
-                  <div style={{ color: "var(--muted)", fontSize: "0.88rem" }}>
+                  <div style={{ color: "var(--muted)", fontSize: "0.85rem" }}>
                     Thanks for reaching out. I'll get back to you soon.
                   </div>
                   <button
                     onClick={() => setFormStatus(null)}
                     style={{
-                      marginTop: "1.5rem",
+                      marginTop: "1.4rem",
                       fontFamily: "var(--fm)",
-                      fontSize: "0.72rem",
+                      fontSize: "0.7rem",
                       color: "var(--accent)",
                       background: "none",
                       border: "none",
@@ -2316,19 +2360,19 @@ export default function App() {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: "1.2rem",
+                    gap: "1.1rem",
                   }}
                 >
                   {[
                     {
                       name: "name",
-                      label: "Your name",
+                      label: "YOUR NAME",
                       type: "text",
                       placeholder: "Firstname Lastname",
                     },
                     {
                       name: "email",
-                      label: "Email address",
+                      label: "EMAIL ADDRESS",
                       type: "email",
                       placeholder: "you@company.com",
                     },
@@ -2338,13 +2382,13 @@ export default function App() {
                         style={{
                           display: "block",
                           fontFamily: "var(--fm)",
-                          fontSize: "0.65rem",
+                          fontSize: "0.6rem",
                           color: "var(--muted)",
                           letterSpacing: "0.1em",
-                          marginBottom: "0.5rem",
+                          marginBottom: "0.45rem",
                         }}
                       >
-                        {f.label.toUpperCase()}
+                        {f.label}
                       </label>
                       <input
                         name={f.name}
@@ -2358,7 +2402,7 @@ export default function App() {
                           background: "var(--surface)",
                           border: "1px solid var(--border)",
                           borderRadius: 6,
-                          padding: "0.75rem 1rem",
+                          padding: isMobile ? "0.7rem 0.9rem" : "0.75rem 1rem",
                           color: "var(--text)",
                           fontFamily: "var(--fm)",
                           fontSize: "0.85rem",
@@ -2372,10 +2416,10 @@ export default function App() {
                       style={{
                         display: "block",
                         fontFamily: "var(--fm)",
-                        fontSize: "0.65rem",
+                        fontSize: "0.6rem",
                         color: "var(--muted)",
                         letterSpacing: "0.1em",
-                        marginBottom: "0.5rem",
+                        marginBottom: "0.45rem",
                       }}
                     >
                       MESSAGE
@@ -2386,13 +2430,13 @@ export default function App() {
                       value={formData.message}
                       onChange={handleFormChange}
                       required
-                      rows={5}
+                      rows={isMobile ? 4 : 5}
                       style={{
                         width: "100%",
                         background: "var(--surface)",
                         border: "1px solid var(--border)",
                         borderRadius: 6,
-                        padding: "0.75rem 1rem",
+                        padding: isMobile ? "0.7rem 0.9rem" : "0.75rem 1rem",
                         color: "var(--text)",
                         fontFamily: "var(--fm)",
                         fontSize: "0.85rem",
@@ -2424,6 +2468,7 @@ export default function App() {
                       alignItems: "center",
                       justifyContent: "center",
                       gap: "0.5rem",
+                      width: "100%",
                     }}
                   >
                     {formStatus === "sending" ? (
@@ -2465,29 +2510,31 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* ── FOOTER ── */}
       <footer
         style={{
-          padding: "2rem 5%",
+          padding: isMobile ? "1.5rem 1.25rem" : "2rem 5%",
           borderTop: "1px solid var(--border)",
           position: "relative",
           zIndex: 1,
         }}
       >
         <div
-          className="footer-inner"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
             display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             justifyContent: "space-between",
             alignItems: "center",
+            gap: isMobile ? "0.5rem" : 0,
+            textAlign: isMobile ? "center" : "left",
           }}
         >
           <div
             style={{
               fontFamily: "var(--fm)",
-              fontSize: "0.68rem",
+              fontSize: "0.65rem",
               color: "var(--dim)",
               letterSpacing: "0.05em",
             }}
@@ -2498,7 +2545,7 @@ export default function App() {
           <div
             style={{
               fontFamily: "var(--fm)",
-              fontSize: "0.68rem",
+              fontSize: "0.65rem",
               color: "var(--dim)",
               letterSpacing: "0.05em",
             }}
