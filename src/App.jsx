@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import avatar from "./assets/img.png";
 import "./App.css";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
@@ -686,7 +687,6 @@ export default function App() {
           backgroundSize: "100% 100%,100% 100%,56px 56px,56px 56px",
         }}
       />
-
       {/* PROGRESS BAR */}
       <div
         style={{
@@ -701,7 +701,6 @@ export default function App() {
           pointerEvents: "none",
         }}
       />
-
       {/* ── NAV ── */}
       <nav
         style={{
@@ -896,7 +895,6 @@ export default function App() {
           </div>
         )}
       </nav>
-
       {/* ── HERO ── */}
       <section
         id="hero"
@@ -1162,7 +1160,7 @@ export default function App() {
                 }}
               >
                 <img
-                  src="/src/assets/img.png" // <-- replace with your image path
+                  src={avatar}
                   alt="avatar"
                   style={{
                     width: "90%",
@@ -1251,7 +1249,6 @@ export default function App() {
           )}
         </div>
       </section>
-
       {/* ── ABOUT ── */}
       <section
         id="about"
@@ -1428,7 +1425,6 @@ export default function App() {
           </div>
         </div>
       </section>
-
       {/* ── SKILLS ── */}
       <section
         id="skills"
@@ -1527,7 +1523,6 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
       {/* ── EXPERIENCE ── */}
       <section
         id="experience"
@@ -1671,7 +1666,6 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
       {/* ── COURSES ── */}
       <section
         id="courses"
@@ -1851,7 +1845,6 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
       {/* ── PROJECTS ── */}
       <section
         id="projects"
@@ -1995,7 +1988,6 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
       {/* ── EDUCATION ── */}
       <section
         id="education"
@@ -2106,7 +2098,6 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
       {/* ── CONTACT ── */}
       <section
         id="contact"
@@ -2516,7 +2507,6 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
       {/* ── FOOTER ── */}
       <footer
         style={{
