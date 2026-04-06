@@ -1162,7 +1162,7 @@ export default function App() {
                 }}
               >
                 <img
-                  src="/img.png" // <-- replace with your image path
+                  src="/src/assets/img.png" // <-- replace with your image path
                   alt="avatar"
                   style={{
                     width: "90%",
