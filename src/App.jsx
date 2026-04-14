@@ -15,83 +15,48 @@ const NAV_LINKS = [
 
 const CHIPS = [
   {
-    label: "MERN Stack",
+    label: "QA Engineering",
     hi: true,
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+      </svg>
+    ),
+  },
+  {
+    label: "Business Analyst",
+    hi: true,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="2" y="3" width="20" height="14" rx="2" />
         <path d="M8 21h8M12 17v4" />
       </svg>
     ),
   },
   {
-    label: "Azure Cloud",
+    label: "MERN Stack",
     hi: true,
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Python",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
       </svg>
     ),
   },
   {
-    label: "Git",
+    label: "ISTQB (in progress)",
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
       </svg>
     ),
   },
   {
-    label: "Docker",
+    label: "JIRA & Confluence",
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Agile/Scrum",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="3" y="3" width="7" height="7" />
         <rect x="14" y="3" width="7" height="7" />
         <rect x="14" y="14" width="7" height="7" />
@@ -100,16 +65,18 @@ const CHIPS = [
     ),
   },
   {
-    label: "Automation",
+    label: "Agile/Scrum",
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <circle cx="12" cy="12" r="3" />
-        <path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Git",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
       </svg>
     ),
   },
@@ -117,20 +84,51 @@ const CHIPS = [
 
 const STATS = [
   { num: "1+", label: "YRS EXP" },
-  { num: "BSc", label: "COMP SCI" },
-  { num: "MSc", label: "IN PROGRESS" },
+  { num: "QA", label: "ISTQB PREP" },
+  { num: "BA", label: "TARGET ROLE" },
   { num: "LT", label: "VILNIUS" },
 ];
 
 const SKILL_GROUPS = [
   {
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+      </svg>
+    ),
+    title: "QA & TESTING",
+    tags: [
+      { label: "Manual Testing", hot: true },
+      { label: "Test Case Design", hot: true },
+      { label: "Bug Reporting", hot: true },
+      { label: "Test Plan Writing" },
+      { label: "Defect Lifecycle" },
+      { label: "Regression Testing" },
+      { label: "ISTQB Foundation (in progress)" },
+    ],
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8M12 17v4" />
+      </svg>
+    ),
+    title: "BUSINESS ANALYSIS",
+    tags: [
+      { label: "Requirements Gathering", hot: true },
+      { label: "User Stories", hot: true },
+      { label: "Acceptance Criteria", hot: true },
+      { label: "Process Mapping" },
+      { label: "Stakeholder Analysis" },
+      { label: "BRD Writing" },
+      { label: "AS-IS / TO-BE" },
+    ],
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
       </svg>
@@ -138,8 +136,8 @@ const SKILL_GROUPS = [
     title: "DEVELOPMENT",
     tags: [
       { label: "JavaScript", hot: true },
-      { label: "Node.js", hot: true },
       { label: "React", hot: true },
+      { label: "Node.js", hot: true },
       { label: "MongoDB" },
       { label: "Express.js" },
       { label: "REST APIs" },
@@ -149,35 +147,7 @@ const SKILL_GROUPS = [
   },
   {
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    title: "CLOUD & DEVOPS",
-    tags: [
-      { label: "Azure Cloud ✓", hot: true },
-      { label: "Git / GitHub", hot: true },
-      { label: "Docker" },
-      { label: "Linux basics" },
-      { label: "CI/CD" },
-      { label: "Kubernetes" },
-      { label: "Terraform" },
-      { label: "Ansible" },
-    ],
-  },
-  {
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="3" y="3" width="7" height="7" />
         <rect x="14" y="3" width="7" height="7" />
         <rect x="14" y="14" width="7" height="7" />
@@ -186,22 +156,19 @@ const SKILL_GROUPS = [
     ),
     title: "TOOLS & METHODS",
     tags: [
+      { label: "JIRA", hot: true },
+      { label: "Confluence", hot: true },
       { label: "Agile / Scrum", hot: true },
-      { label: "Jira" },
-      { label: "Confluence" },
+      { label: "Git / GitHub" },
+      { label: "Postman" },
+      { label: "draw.io" },
       { label: "Microsoft 365" },
       { label: "Google Workspace" },
-      { label: "Replit" },
     ],
   },
   {
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
@@ -227,29 +194,49 @@ const EXPERIENCE = [
     roleDetail: "Organizational Innovation & Management",
     company: "Kazimieras Simonavičius University · Vilnius, LT 🇱🇹",
     bullets: [
-      "Studying process optimization, digital transformation, and management innovation",
-      "Applying organizational theory to IT systems design and infrastructure planning",
-      "Actively self-studying Azure, Linux, Docker, and DevOps pipelines alongside coursework",
+      "Studying process optimisation, digital transformation, and organisational change management",
+      "Applying stakeholder analysis and requirements frameworks — core BA competencies",
+      "Concurrently studying for ISTQB Foundation Level QA certification (target: June 2026)",
     ],
   },
   {
     live: false,
-    date: "SEP 2024 – JAN 2026 · 16 MONTHS",
+    date: "SEP 2024 – JAN 2026 · 15 MONTHS",
     role: "Junior Software Engineer",
     roleDetail: "",
     company: "ITS Tech World · Gujranwala, Pakistan",
     bullets: [
       "Developed and maintained full-stack web applications using MongoDB, Express.js, React, and Node.js",
-      "Built and optimized RESTful APIs for efficient, scalable data handling",
-      "Collaborated cross-functionally on feature development, debugging, and release cycles",
-      "Translated business requirements into technical solutions",
-      "Improved application performance through systematic code review and optimization",
-      "Established Git-based collaborative workflows for the team",
+      "Built and optimised RESTful APIs for efficient, scalable data handling",
+      "Participated in requirement gathering — translating business needs into technical specifications (core BA skill)",
+      "Collaborated in Agile/Scrum teams using JIRA for sprint planning and bug tracking",
+      "Identified, reported, and resolved software defects systematically — directly applicable to QA roles",
+      "Improved application performance through systematic code review and optimisation",
     ],
   },
 ];
 
 const COURSES = [
+const COURSES = [
+  {
+    badge: "IN PROGRESS",
+    badgeType: "progress",
+    provider: "UDEMY · ISTQB OFFICIAL SYLLABUS",
+    title: "ISTQB Foundation Level — Certified Tester (CTFL v4.0)",
+    desc: "Complete ISTQB Foundation Level preparation course covering all syllabus chapters: testing fundamentals, test design techniques (black-box, white-box, experience-based), test management, defect lifecycle, agile testing, and exam practice with timed mock exams.",
+    tags: [
+      "Manual Testing",
+      "Test Design",
+      "Black-box Testing",
+      "Defect Lifecycle",
+      "Test Management",
+      "Agile Testing",
+      "ISTQB CTFL v4.0",
+    ],
+    link: "https://www.udemy.com/course/foundation-level-training/",
+    linkLabel: "View on Udemy",
+    logoType: "udemy",
+  },
   {
     badge: "IN PROGRESS",
     badgeType: "progress",
@@ -307,36 +294,52 @@ const COURSES = [
 
 const PROJECTS = [
   {
-    title: "DayWise",
-    desc: "A productivity application for streamlining daily workflows with intelligent task management and automation concepts. Built end-to-end using AI-assisted tooling.",
-    tags: ["Replit", "AI-assisted dev", "Workflow automation", "UX design"],
+    title: "DukaanOnline",
+    desc: "A fully functional e-commerce web application built with React and deployed live on Netlify. Features product listings, browsing, and shopping cart — demonstrating production-ready frontend development and independent deployment.",
+    tags: ["React", "Netlify", "E-commerce", "Component architecture", "Responsive UI"],
+    link: "https://dukaanonline.netlify.app/",
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M9 9h6M9 12h6M9 15h4" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 01-8 0" />
+      </svg>
+    ),
+  },
+  {
+    title: "Courier Management System",
+    desc: "Full-stack courier platform (parcel tracking, delivery assignment, status updates) built as a BSc final year project. Led the complete QA testing phase — wrote test cases, executed test plans, logged defects, and produced a formal test report. Mirrors a real junior QA role.",
+    tags: ["React", "Node.js", "MongoDB", "Express.js", "Manual Testing", "Test Plan", "QA Documentation"],
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="1" y="3" width="15" height="13" rx="1" />
+        <path d="M16 8h4l3 5v3h-7V8z" />
+        <circle cx="5.5" cy="18.5" r="2.5" />
+        <circle cx="18.5" cy="18.5" r="2.5" />
       </svg>
     ),
   },
   {
     title: "MERN Stack Applications",
-    desc: "Multiple production-grade apps built at ITS Tech World — RESTful backends, React frontends, MongoDB schemas, and optimized API layers.",
+    desc: "Multiple production-grade apps built at ITS Tech World — RESTful backends, React frontends, MongoDB schemas, and optimised API layers serving real users.",
     tags: ["React", "Node.js", "MongoDB", "Express.js", "REST API", "Git"],
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
         <polyline points="14 2 14 8 20 8" />
         <line x1="16" y1="13" x2="8" y2="13" />
         <line x1="16" y1="17" x2="8" y2="17" />
+      </svg>
+    ),
+  },
+  {
+    title: "DayWise",
+    desc: "A productivity application for streamlining daily workflows with intelligent task management and automation concepts. Built end-to-end using AI-assisted tooling — practising solution design and process mapping.",
+    tags: ["Replit", "AI-assisted dev", "Workflow automation", "UX design", "Process mapping"],
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M9 9h6M9 12h6M9 15h4" />
       </svg>
     ),
   },
@@ -2547,9 +2550,8 @@ export default function App() {
               letterSpacing: "0.05em",
             }}
           >
-            Open to IT Admin & DevOps roles{" "}
-            <span style={{ color: "var(--accent)" }}>·</span> EU work
-            authorization
+            Open to Junior QA & BA roles{" "}
+            <span style={{ color: "var(--accent)" }}>·</span> Vilnius, Lithuania
           </div>
         </div>
       </footer>
