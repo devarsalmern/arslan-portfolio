@@ -217,7 +217,6 @@ const EXPERIENCE = [
 ];
 
 const COURSES = [
-const COURSES = [
   {
     badge: "IN PROGRESS",
     badgeType: "progress",
